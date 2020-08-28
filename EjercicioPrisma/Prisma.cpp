@@ -1,5 +1,5 @@
 /**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**/
-/**//* 22.333.444-PEREZ_DEL_RIO,JuanManuel-(07-2299) *//**/
+/**//* 39.336.695-VACA_AGUIRRE,JaredMartin-(05-1965) *//**/
 /**//**   DEBE MODIFICAR LA LÍNEA DE COMENTARIO ANTERIOR CON SUS DATOS   **//**/
 /**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**/
 /**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**/
@@ -7,33 +7,49 @@
 
 #include "Prisma.h"
 
-Prisma::Prisma(Prisma& obj)
+//Constructor DEFAULT
+Prisma::Prisma(string _color, int _ancho, int _alto, int _profundidad)
+{
+    color = _color;
+    ancho = _ancho;
+    alto = _alto;
+    profundidad = _profundidad;
+}
+//definicion de operadores
+Prisma & Prisma::operator=(const Prisma &obj)
 {
     alto = obj.alto;
     ancho = obj.ancho;
     profundidad = obj.profundidad;
     color = obj.color;
+    return *this;
 }
 
-Prisma::Prisma(string _color, int _alto, int _ancho, int _profundidad)
+Prisma operator*(const int &n, const Prisma &obj)
 {
-    alto = _alto;
-    ancho = _ancho;
-    profundidad = _profundidad;
-    color = _color;
+    Prisma pri(obj.color, obj.ancho * n, obj.alto * n, obj.profundidad * n);
+    return pri;
 }
 
-//Operador Output
-ostream& operator << (ostream& output, Prisma& obj)
+Prisma Prisma::operator++(int)
 {
-    output << obj.alto <<"x"<< obj.ancho <<"x"<< obj.profundidad <<"-"<< obj.color;
-    return output;
+    Prisma aux(*this);
+    this->alto++;
+    this->ancho++;
+    this->profundidad++;
+    return aux;
 }
 
-
-Prisma operator*(int n,const Prisma& obj)
+Prisma& Prisma::operator--()
 {
-    Prisma p1(obj.color, obj.alto*n, obj.ancho*n, obj.profundidad*n);
-    return p1;
+    this->alto--;
+    this->ancho--;
+    this->profundidad--;
+    return *this;
 }
 
+ostream& operator<<(ostream &salida, const Prisma &obj)
+{
+    salida << obj.ancho << "x" << obj.alto <<"x" << obj.profundidad << "-" << obj.color;
+    return salida;
+}

@@ -1,5 +1,5 @@
 /**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**/
-/**//* 22.333.444-PEREZ_DEL_RIO,JuanManuel-(07-2299) *//**/
+/**//* 39.336.695-VACA_AGUIRRE,JaredMartin-(05-1965) *//**/
 /**//**   DEBE MODIFICAR LA LÍNEA DE COMENTARIO ANTERIOR CON SUS DATOS   **//**/
 /**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**/
 /**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**//**/
@@ -16,32 +16,21 @@ using namespace std;
 class Prisma
 {
 private:
-    int alto;
     int ancho;
+    int alto;
     int profundidad;
-    string color;     /// <--preferentemente, de lo contrario:  char *color;
+    string color;
 
 public:
-    Prisma(string color = "Incoloro", int alto = 1, int ancho = 1, int profundidad = 1);
-    Prisma(Prisma &);
+    Prisma(string = "Incoloro", int = 1, int = 1, int = 1);
 
-    //Operadores
-    friend ostream& operator << (ostream&, Prisma&);
-
-    Prisma& operator=(Prisma& obj)
-    {
-        color = obj.color;
-        alto = obj.alto;
-        ancho = obj.ancho;
-        profundidad = obj.profundidad;
-
-        return this;
-    }
-
-    friend Prisma operator*(int n, Prisma& obj);
+    //OPERADORES
+    Prisma &operator=(const Prisma &);
+    Prisma &operator--();
+    Prisma operator++(int);
+    friend Prisma operator*(const int &, const Prisma &);
+    friend ostream & operator<<(ostream &salida, const Prisma &);
 };
-
-
 
 #endif // PRISMA_H_
 
